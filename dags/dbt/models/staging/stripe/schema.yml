@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_stripe__revenue_recognition
+    description: This table details how our revenue is recognized each month.
+    config:
+      alias: revenue_recognition
+
+    columns:
+      - name: accounting_period
+        data_tests:
+          - not_null
+      - name: debit
+        data_tests:
+          - not_null
+      - name: credit
+        data_tests:
+          - not_null
+      - name: amount
+        data_tests:
+          - not_null
+
+    tests:
+      - dbt_expectations.expect_row_values_to_have_data_for_every_n_datepart:
+          date_col: accounting_period
+          date_part: month

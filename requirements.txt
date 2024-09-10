@@ -1,0 +1,4 @@
+astronomer-cosmos
+dbt-bigquery
+apache-airflow-providers-slack
+airflow-provider-hex
