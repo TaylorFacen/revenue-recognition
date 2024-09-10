@@ -1,0 +1,28 @@
+# This file allows you to configure Airflow Connections, Pools, and Variables in a single place for local development only.
+# NOTE: json dicts can be added to the conn_extra field as yaml key value pairs. See the example below.
+
+# For more information, refer to our docs: https://www.astronomer.io/docs/astro/cli/develop-project#configure-airflow_settingsyaml-local-development-only
+# For questions, reach out to: https://support.astronomer.io
+# For issues create an issue ticket here: https://github.com/astronomer/astro-cli/issues
+
+airflow:
+  connections:
+    - conn_id: stripe_api
+      conn_type: http
+      conn_host: https://api.stripe.com
+    - conn_id: google_cloud_default
+      conn_type: google_cloud_platform
+      conn_extra: 
+        extra__google_cloud_platform__project: INSERT_PROJECT_NAME
+        extra__google_cloud_platform__scope: https://www.googleapis.com/auth/cloud-platform
+    - conn_id: hex_default
+      conn_type: hex
+      conn_extra:
+      conn_host: https://app.hex.tech
+  pools:
+    - pool_name:
+      pool_slot:
+      pool_description:
+  variables:
+    - variable_name:
+      variable_value:
