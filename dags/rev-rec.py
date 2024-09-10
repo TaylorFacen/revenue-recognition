@@ -210,7 +210,8 @@ def revenue_recognition():
     @task_group(group_id='report')
     def report():
         def monday_check(**kwargs):
-            is_monday = kwargs['dag_run'].logical_date.weekday() == 0
+            dag_logical_date = kwargs['dag_run'].logical_date
+            is_monday = dag_logical_date.weekday() == 0
             if not is_monday:
                 return False
 
@@ -225,7 +226,7 @@ def revenue_recognition():
                 return True
             dag_runs.sort(key=lambda x: x.execution_date, reverse=True)
             last_dag_run = dag_runs[0]
-            return last_dag_run.execution_date.weekday() != 0
+            return last_dag_run.execution_date.date() != dag_logical_date.date()
 
         should_post_report = ShortCircuitOperator(
             task_id='should_post_report',
